@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EncryptionAI Stream - AI-Powered Live Streaming Platform</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Animated Background -->
+    <div class="bg-animation">
+        <div class="floating-shapes">
+            <div class="shape"></div>
+            <div class="shape"></div>
+            <div class="shape"></div>
+            <div class="shape"></div>
+            <div class="shape"></div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">EncryptionAI Stream</a>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#dashboard">Dashboard</a></li>
+                <li><a href="#pricing">Pricing</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <a href="#" class="cta-button" onclick="startStreaming()">Start Streaming</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content" data-aos="fade-up">
+            <h1>Next-Gen AI Streaming Platform</h1>
+            <p>Experience the future of content creation with our revolutionary AI-powered streaming technology. Transform ordinary streams into cinematic masterpieces with real-time enhancement, professional-grade processing, and intelligent optimization.</p>
+            <div class="hero-buttons">
+                <a href="#" class="btn-primary" onclick="startStreaming()">
+                    <i class="fas fa-play"></i>
+                    Start Streaming Now
+                </a>
+                <a href="#features" class="btn-secondary">
+                    <i class="fas fa-info-circle"></i>
+                    Learn More
+                </a>
+            </div>
+        </div>
+        
+        <!-- 3D Animation -->
+        <div class="hero-3d" data-aos="fade-left" data-aos-delay="300">
+            <div class="cube">
+                <div class="cube-face front"><i class="fas fa-video"></i></div>
+                <div class="cube-face back"><i class="fas fa-robot"></i></div>
+                <div class="cube-face right"><i class="fas fa-magic"></i></div>
+                <div class="cube-face left"><i class="fas fa-eye"></i></div>
+                <div class="cube-face top"><i class="fas fa-star"></i></div>
+                <div class="cube-face bottom"><i class="fas fa-heart"></i></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="container">
+            <div class="section-title" data-aos="fade-up">
+                <h2>Cutting-Edge AI Technology</h2>
+                <p>Discover our suite of advanced AI tools designed to elevate your streaming experience to professional broadcast quality</p>
+            </div>
+            
+            <div class="features-grid">
+                <div class="feature-card glass" data-aos="fade-up" data-aos-delay="100">
+                    <div class="feature-icon">
+                        <i class="fas fa-expand-arrows-alt"></i>
+                    </div>
+                    <h3>Ultra HD Upscaling</h3>
+                    <p>Instantly transform any video quality to stunning 4K resolution using our proprietary neural network technology</p>
+                </div>
+                
+                <div class="feature-card glass" data-aos="fade-up" data-aos-delay="200">
+                    <div class="feature-icon">
+                        <i class="fas fa-volume-up"></i>
+                    </div>
+                    <h3>Intelligent Audio Processing</h3>
+                    <p>Advanced noise cancellation and audio enhancement algorithms deliver crystal-clear sound quality</p>
+                </div>
+                
+                <div class="feature-card glass" data-aos="fade-up" data-aos-delay="300">
+                    <div class="feature-icon">
+                        <i class="fas fa-palette"></i>
+                    </div>
+                    <h3>Dynamic Color Grading</h3>
+                    <p>Professional-grade color correction and enhancement for cinematic visual quality in real-time</p>
+                    </div>
+                
+                <div class="feature-card glass" data-aos="fade-up" data-aos-delay="400">
+                    <div class="feature-icon">
+                        <i class="fas fa-balance-scale"></i>
+                    </div>
+                    <h3>Adaptive Stabilization</h3>
+                    <p>Eliminate camera shake and motion blur with our advanced stabilization algorithms for smooth, professional footage</p>
+                </div>
+                
+                <div class="feature-card glass" data-aos="fade-up" data-aos-delay="500">
+                    <div class="feature-icon">
+                        <i class="fas fa-eye"></i>
+                    </div>
+                    <h3>Real-Time Analytics</h3>
+                    <p>Comprehensive monitoring and optimization tools that continuously enhance your streaming performance</p>
+                </div>
+                
+                <div class="feature-card glass" data-aos="fade-up" data-aos-delay="600">
+                    <div class="feature-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h3>Universal Compatibility</h3>
+                    <p>Seamlessly works across all devices and platforms - mobile, tablet, desktop. Zero installation required</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Dashboard Preview -->
+    <section class="dashboard-preview" id="dashboard">
+        <div class="container">
+            <div class="dashboard-container">
+                <div class="dashboard-content" data-aos="fade-right">
+                    <h2>Advanced Control Center</h2>
+                    <p>Take command of your streaming empire with our comprehensive dashboard. Monitor performance, engage with your audience, and optimize your content with powerful analytics and real-time insights.</p>
+                    
+                    <ul class="dashboard-features">
+                        <li><i class="fas fa-chart-line"></i> Real-time analytics and metrics</li>
+                        <li><i class="fas fa-users"></i> Viewer engagement tracking</li>
+                        <li><i class="fas fa-robot"></i> AI performance monitoring</li>
+                        <li><i class="fas fa-dollar-sign"></i> Revenue and monetization tools</li>
+                        <li><i class="fas fa-cog"></i> Advanced stream customization</li>
+                    </ul>
+                    
+                    <a href="#" class="btn-primary" onclick="startStreaming()">
+                        <i class="fas fa-tachometer-alt"></i>
+                        Open Dashboard
+                    </a>
+                </div>
+                
+                <div class="dashboard-mockup" data-aos="fade-left">
+                    <div class="mockup-screen">
+                        <div class="mockup-header">
+                            <div class="mockup-dot red"></div>
+                            <div class="mockup-dot yellow"></div>
+                            <div class="mockup-dot green"></div>
+                        </div>
+                        <div class="mockup-content">
+                            <i class="fas fa-chart-area" style="font-size: 3rem; opacity: 0.5;"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section class="pricing" id="pricing">
+        <div class="container">
+            <div class="section-title" data-aos="fade-up">
+                <h2>Choose Your Plan</h2>
+                <p>Start free and upgrade as you grow. No hidden fees, cancel anytime.</p>
+            </div>
+            
+            <div class="pricing-grid">
+                <div class="pricing-card glass" data-aos="fade-up" data-aos-delay="100">
+                    <div class="pricing-header">
+                        <h3>Starter</h3>
+                        <div class="pricing-price">Free</div>
+                    </div>
+                    <ul class="pricing-features">
+                        <li><i class="fas fa-check"></i> 720p streaming</li>
+                        <li><i class="fas fa-check"></i> Basic AI enhancement</li>
+                        <li><i class="fas fa-check"></i> 2 hours/month</li>
+                        <li><i class="fas fa-check"></i> Community support</li>
+                    </ul>
+                    <a href="#" class="btn-secondary">Get Started</a>
+                </div>
+                
+                <div class="pricing-card glass featured" data-aos="fade-up" data-aos-delay="200">
+                    <div class="pricing-header">
+                        <h3>Pro</h3>
+                        <div class="pricing-price">$29<span style="font-size: 1rem;">/mo</span></div>
+                    </div>
+                    <ul class="pricing-features">
+                        <li><i class="fas fa-check"></i> 4K streaming</li>
+                        <li><i class="fas fa-check"></i> All AI features</li>
+                        <li><i class="fas fa-check"></i> Unlimited streaming</li>
+                        <li><i class="fas fa-check"></i> Priority support</li>
+                        <li><i class="fas fa-check"></i> Advanced analytics</li>
+                    </ul>
+                    <a href="#" class="btn-primary">Start Pro Trial</a>
+                </div>
+                
+                <div class="pricing-card glass" data-aos="fade-up" data-aos-delay="300">
+                    <div class="pricing-header">
+                        <h3>Enterprise</h3>
+                        <div class="pricing-price">$99<span style="font-size: 1rem;">/mo</span></div>
+                    </div>
+                    <ul class="pricing-features">
+                        <li><i class="fas fa-check"></i> Custom AI models</li>
+                        <li><i class="fas fa-check"></i> White-label solution</li>
+                        <li><i class="fas fa-check"></i> API access</li>
+                        <li><i class="fas fa-check"></i> Dedicated support</li>
+                        <li><i class="fas fa-check"></i> Custom integrations</li>
+                    </ul>
+                    <a href="#" class="btn-secondary">Contact Sales</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stream Interface -->
+    <div class="stream-interface" id="streamInterface">
+        <div class="stream-header">
+            <div>
+                <h2 style="color: var(--accent-color); font-family: 'Orbitron', monospace;">EncryptionAI Stream Dashboard</h2>
+            </div>
+            <div class="stream-controls">
+                <button class="stream-btn primary" id="startStreamBtn">
+                    <i class="fas fa-play"></i> Start Stream
+                </button>
+                <button class="stream-btn danger" id="stopStreamBtn" style="display: none;">
+                    <i class="fas fa-stop"></i> Stop Stream
+                </button>
+                <button class="stream-btn" onclick="closeStreamInterface()">
+                    <i class="fas fa-times"></i> Close
+                </button>
+            </div>
+        </div>
+        
+        <div class="stream-main">
+            <div class="stream-video">
+                <video id="streamVideo" autoplay muted playsinline style="width: 100%; height: 100%; object-fit: cover;"></video>
+                <div style="position: absolute; top: 20px; left: 20px; background: rgba(0,0,0,0.7); padding: 10px 20px; border-radius: 20px; color: white;">
+                    <i class="fas fa-circle" style="color: #ff4757; margin-right: 10px;"></i>
+                    <span id="streamStatus">Ready to Stream</span>
+                </div>
+            </div>
+            
+            <div class="stream-sidebar">
+                <div class="ai-controls">
+                    <h3><i class="fas fa-robot"></i> AI Enhancement</h3>
+                    
+                    <div class="ai-toggle">
+                        <span>4K Upscaling</span>
+                        <div class="toggle-switch" data-ai="upscaling"></div>
+                    </div>
+                    
+                    <div class="ai-toggle">
+                        <span>Noise Reduction</span>
+                        <div class="toggle-switch active" data-ai="denoising"></div>
+                    </div>
+                    
+                    <div class="ai-toggle">
+                        <span>Color Enhancement</span>
+                        <div class="toggle-switch active" data-ai="colorCorrection"></div>
+                    </div>
+                    
+                    <div class="ai-toggle">
+                        <span>Stabilization</span>
+                        <div class="toggle-switch" data-ai="stabilization"></div>
+                    </div>
+                </div>
+                
+                <div class="stream-stats">
+                    <h3><i class="fas fa-chart-line"></i> Live Stats</h3>
+                    
+                    <div class="stat-item">
+                        <span>Viewers</span>
+                        <span class="stat-value" id="viewerCount">0</span>
+                    </div>
+                    
+                    <div class="stat-item">
+                        <span>Latency</span>
+                        <span class="stat-value" id="latencyValue">0ms</span>
+                    </div>
+                    
+                    <div class="stat-item">
+                        <span>Quality</span>
+                        <span class="stat-value" id="qualityValue">HD</span>
+                    </div>
+                    
+                    <div class="stat-item">
+                        <span>AI Status</span>
+                        <span class="stat-value" id="aiStatus">Ready</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer" id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>EncryptionAI Stream</h3>
+                    <p>The future of AI-powered live streaming. Transform your content with cutting-edge artificial intelligence.</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Features</h3>
+                    <ul>
+                        <li><a href="#">4K AI Upscaling</a></li>
+                        <li><a href="#">Noise Reduction</a></li>
+                        <li><a href="#">Color Enhancement</a></li>
+                        <li><a href="#">Video Stabilization</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Support</h3>
+                    <ul>
+                        <li><a href="#">Documentation</a></li>
+                        <li><a href="#">API Reference</a></li>
+                        <li><a href="#">Community</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Company</h3>
+                    <ul>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Careers</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 EncryptionAI Stream. All rights reserved. Powered by Advanced AI Technology.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="/js/simple-working-user.js"></script>
+    <script src="/js/advanced-stream.js"></script>
+    <script src="/js/stream-app.js"></script>
+</body>
+</html>

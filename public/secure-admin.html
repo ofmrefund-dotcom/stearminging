@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EncryptionAI Stream - Secure Admin Control</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="/css/admin.css" rel="stylesheet">
+    <style>
+        .owner-badge {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+            color: #333;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 0.9rem;
+            z-index: 10002;
+            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
+        }
+        
+        .secure-header {
+            background: linear-gradient(135deg, #2C3E50 0%, #34495E 100%);
+            padding: 15px;
+            text-align: center;
+            color: #FFD700;
+            font-weight: bold;
+            border-bottom: 2px solid #FFD700;
+        }
+    </style>
+</head>
+<body>
+    <!-- Owner Badge -->
+    <div class="owner-badge">
+        <i class="fas fa-crown"></i> OWNER ACCESS
+    </div>
+
+    <!-- Secure Header -->
+    <div class="secure-header">
+        <h2><i class="fas fa-shield-alt"></i> SECURE ADMIN CONTROL PANEL</h2>
+        <p>Private Owner Access - Full Platform Control</p>
+    </div>
+
+    <!-- Admin Header -->
+    <div class="admin-header">
+        <div class="admin-title">
+            <i class="fas fa-crown"></i>
+            EncryptionAI Stream - Owner Control
+        </div>
+        <div class="admin-stats">
+            <div class="stat-item">
+                <div class="stat-value" id="totalUsers">0</div>
+                <div class="stat-label">Total Users</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value" id="activeStreams">0</div>
+                <div class="stat-label">Live Streams</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value" id="aiProcessing">0</div>
+                <div class="stat-label">AI Processing</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value" id="connectionStatus" style="color: #ff4757;">Connecting...</div>
+                <div class="stat-label">Connection</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Admin Main Content -->
+    <div class="admin-main">
+        <!-- Sidebar Controls -->
+        <div class="admin-sidebar">
+            <div class="sidebar-section">
+                <div class="sidebar-title">
+                    <i class="fas fa-crown"></i>
+                    Owner Controls
+                </div>
+                <button class="control-button" onclick="refreshAllStreams()">
+                    <i class="fas fa-sync"></i>
+                    Refresh All Streams
+                </button>
+                <button class="control-button danger" onclick="stopAllStreams()">
+                    <i class="fas fa-stop"></i>
+                    Stop All Streams
+                </button>
+                <button class="control-button success" onclick="enableAIForAll()">
+                    <i class="fas fa-robot"></i>
+                    Enable AI for All
+                </button>
+                <button class="control-button" onclick="exportUserData()">
+                    <i class="fas fa-download"></i>
+                    Export User Data
+                </button>
+                <button class="control-button" onclick="showPlatformStats()">
+                    <i class="fas fa-chart-bar"></i>
+                    Platform Analytics
+                </button>
+            </div>
+
+            <div class="sidebar-section">
+                <div class="sidebar-title">
+                    <i class="fas fa-chart-line"></i>
+                    System Status
+                </div>
+                <div class="status-item">
+                    <span>Server Status</span>
+                    <span class="status-indicator online" id="serverStatus">Online</span>
+                </div>
+                <div class="status-item">
+                    <span>AI Models</span>
+                    <span class="status-indicator online" id="aiStatus">Ready</span>
+                </div>
+                <div class="status-item">
+                    <span>WebRTC</span>
+                    <span class="status-indicator online" id="webrtcStatus">Active</span>
+                </div>
+                <div class="status-item">
+                    <span>Owner Access</span>
+                    <span class="status-indicator online">Authenticated</span>
+                </div>
+            </div>
+
+            <div class="sidebar-section">
+                <div class="sidebar-title">
+                    <i class="fas fa-cog"></i>
+                    Platform Settings
+                </div>
+                <button class="control-button" onclick="toggleMaintenanceMode()">
+                    <i class="fas fa-tools"></i>
+                    Maintenance Mode
+                </button>
+                <button class="control-button" onclick="backupPlatform()">
+                    <i class="fas fa-save"></i>
+                    Backup Platform
+                </button>
+            </div>
+        </div>
+
+        <!-- Main Content Area -->
+        <div class="admin-content">
+            <div class="content-header">
+                <h2>Live Stream Monitoring - Owner View</h2>
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Search users..." id="userSearch" oninput="searchUsers()">
+                </div>
+            </div>
+
+            <!-- Streams Grid -->
+            <div class="streams-grid" id="streamsGrid">
+                <div style="text-align: center; padding: 40px; color: #888;">
+                    <i class="fas fa-users" style="font-size: 3rem; margin-bottom: 20px;"></i>
+                    <h3>No Users Connected</h3>
+                    <p>Users will appear here when they connect and start streaming</p>
+                    <div style="margin-top: 20px; padding: 15px; background: rgba(255, 215, 0, 0.1); border-radius: 10px; border-left: 4px solid #FFD700;">
+                        <strong>👑 Owner Tip:</strong> Share your main website URL to get users streaming
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Stream Detail Modal -->
+    <div class="modal" id="streamModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modalTitle">Stream Details</h3>
+                <button class="close-btn" onclick="closeModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="stream-detail-grid">
+                    <div class="stream-preview-large">
+                        <div id="modalVideoContainer" style="width: 100%; height: 100%; background: #000; border-radius: 10px; display: flex; align-items: center; justify-content: center; color: white;">
+                            <div style="text-align: center;">
+                                <i class="fas fa-video" style="font-size: 3rem; margin-bottom: 10px;"></i>
+                                <div>Click "Watch Stream" to see user's screen</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="stream-controls">
+                        <h4>Owner Controls</h4>
+                        <button class="control-btn" onclick="watchUserStream()">
+                            <i class="fas fa-eye"></i> Watch Stream
+                        </button>
+                        <button class="control-btn" onclick="toggleAI()">
+                            <i class="fas fa-robot"></i> Toggle AI
+                        </button>
+                        <button class="control-btn danger" onclick="kickUserFromModal()">
+                            <i class="fas fa-ban"></i> Kick User
+                        </button>
+                        <button class="control-btn" onclick="banUser()">
+                            <i class="fas fa-user-slash"></i> Ban User
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/js/simple-working-admin.js"></script>
+    <script>
+        // Owner-specific functions
+        function exportUserData() {
+            console.log('📊 Exporting user data...');
+            if (window.simpleAdmin) {
+                const userData = Array.from(window.simpleAdmin.users.values());
+                const dataStr = JSON.stringify(userData, null, 2);
+                const dataBlob = new Blob([dataStr], {type: 'application/json'});
+                const url = URL.createObjectURL(dataBlob);
+                const link = document.createElement('a');
+                link.href = url;
+                link.download = `user-data-${new Date().toISOString().split('T')[0]}.json`;
+                link.click();
+                URL.revokeObjectURL(url);
+            }
+        }
+
+        function showPlatformStats() {
+            const modal = document.createElement('div');
+            modal.style.cssText = `
+                position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+                background: rgba(0,0,0,0.8); z-index: 10000; display: flex;
+                align-items: center; justify-content: center;
+            `;
+            modal.innerHTML = `
+                <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 40px; border-radius: 20px; max-width: 600px; color: white;">
+                    <h2 style="text-align: center; margin-bottom: 20px;">📊 Platform Analytics</h2>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                        <div style="text-align: center; padding: 20px; background: rgba(255,255,255,0.1); border-radius: 10px;">
+                            <h3>Total Users</h3>
+                            <div style="font-size: 2rem; color: #FFD700;">${window.simpleAdmin ? window.simpleAdmin.users.size : 0}</div>
+                        </div>
+                        <div style="text-align: center; padding: 20px; background: rgba(255,255,255,0.1); border-radius: 10px;">
+                            <h3>Active Streams</h3>
+                            <div style="font-size: 2rem; color: #27AE60;">${document.getElementById('activeStreams').textContent}</div>
+                        </div>
+                    </div>
+                    <div style="text-align: center; margin-top: 20px;">
+                        <button onclick="this.parentElement.parentElement.parentElement.remove()" style="background: #FFD700; color: #333; border: none; padding: 12px 24px; border-radius: 8px; cursor: pointer; font-weight: bold;">
+                            Close
+                        </button>
+                    </div>
+                </div>
+            `;
+            document.body.appendChild(modal);
+        }
+
+        function toggleMaintenanceMode() {
+            const isMaintenanceMode = localStorage.getItem('maintenanceMode') === 'true';
+            localStorage.setItem('maintenanceMode', !isMaintenanceMode);
+            alert(isMaintenanceMode ? 'Maintenance mode disabled' : 'Maintenance mode enabled');
+        }
+
+        function backupPlatform() {
+            alert('Platform backup initiated - Data will be saved to your downloads');
+            exportUserData();
+        }
+
+        function banUser() {
+            if (window.simpleAdmin && window.simpleAdmin.selectedStream) {
+                const userId = window.simpleAdmin.selectedStream.userId;
+                localStorage.setItem(`banned_${userId}`, 'true');
+                kickUser(userId);
+                alert('User has been banned from the platform');
+            }
+        }
+
+        // Show owner welcome message
+        document.addEventListener('DOMContentLoaded', () => {
+            setTimeout(() => {
+                const welcome = document.createElement('div');
+                welcome.style.cssText = `
+                    position: fixed; bottom: 20px; right: 20px; background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+                    color: #333; padding: 15px 25px; border-radius: 10px; font-weight: bold; z-index: 10001;
+                    box-shadow: 0 4px 20px rgba(255, 215, 0, 0.3);
+                `;
+                welcome.innerHTML = '👑 Welcome, Platform Owner!';
+                document.body.appendChild(welcome);
+                
+                setTimeout(() => {
+                    if (document.body.contains(welcome)) {
+                        document.body.removeChild(welcome);
+                    }
+                }, 5000);
+            }, 2000);
+        });
+    </script>
+</body>
+</html>

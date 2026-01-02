@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EncryptionAI Stream - Admin Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="/css/admin.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Admin Header -->
+    <div class="admin-header">
+        <div class="admin-title">
+            <i class="fas fa-shield-alt"></i>
+            EncryptionAI Stream - Admin Control
+        </div>
+        <div class="admin-stats">
+            <div class="stat-item">
+                <div class="stat-value" id="totalUsers">0</div>
+                <div class="stat-label">Total Users</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value" id="activeStreams">0</div>
+                <div class="stat-label">Live Streams</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value" id="aiProcessing">0</div>
+                <div class="stat-label">AI Processing</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value" id="connectionStatus" style="color: #ff4757;">Connecting...</div>
+                <div class="stat-label">Connection</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Admin Main Content -->
+    <div class="admin-main">
+        <!-- Sidebar Controls -->
+        <div class="admin-sidebar">
+            <div class="sidebar-section">
+                <div class="sidebar-title">
+                    <i class="fas fa-cog"></i>
+                    System Controls
+                </div>
+                <button class="control-button" onclick="refreshAllStreams()">
+                    <i class="fas fa-sync"></i>
+                    Refresh All Streams
+                </button>
+                <button class="control-button danger" onclick="stopAllStreams()">
+                    <i class="fas fa-stop"></i>
+                    Stop All Streams
+                </button>
+                <button class="control-button success" onclick="enableAIForAll()">
+                    <i class="fas fa-robot"></i>
+                    Enable AI for All
+                </button>
+            </div>
+
+            <div class="sidebar-section">
+                <div class="sidebar-title">
+                    <i class="fas fa-chart-line"></i>
+                    System Status
+                </div>
+                <div class="status-item">
+                    <span>Server Status</span>
+                    <span class="status-indicator online" id="serverStatus">Online</span>
+                </div>
+                <div class="status-item">
+                    <span>AI Models</span>
+                    <span class="status-indicator online" id="aiStatus">Ready</span>
+                </div>
+                <div class="status-item">
+                    <span>WebRTC</span>
+                    <span class="status-indicator online" id="webrtcStatus">Active</span>
+                </div>
+            </div>
+
+            <div class="sidebar-section">
+                <div class="sidebar-title">
+                    <i class="fas fa-filter"></i>
+                    Filters
+                </div>
+                <select class="filter-select" id="streamFilter" onchange="filterStreams()">
+                    <option value="all">All Streams</option>
+                    <option value="live">Live Only</option>
+                    <option value="offline">Offline Only</option>
+                    <option value="ai-enabled">AI Enabled</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Main Content Area -->
+        <div class="admin-content">
+            <div class="content-header">
+                <h2>Live Stream Monitoring</h2>
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Search users..." id="userSearch" oninput="searchUsers()">
+                </div>
+            </div>
+
+            <!-- Streams Grid -->
+            <div class="streams-grid" id="streamsGrid">
+                <div style="text-align: center; padding: 40px; color: #888;">
+                    <i class="fas fa-users" style="font-size: 3rem; margin-bottom: 20px;"></i>
+                    <h3>No Users Connected</h3>
+                    <p>Users will appear here when they connect and start streaming</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Stream Detail Modal -->
+    <div class="modal" id="streamModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modalTitle">Stream Details</h3>
+                <button class="close-btn" onclick="closeModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="stream-detail-grid">
+                    <div class="stream-preview-large">
+                        <div id="modalVideoContainer" style="width: 100%; height: 100%; background: #000; border-radius: 10px; display: flex; align-items: center; justify-content: center; color: white;">
+                            <div style="text-align: center;">
+                                <i class="fas fa-video" style="font-size: 3rem; margin-bottom: 10px;"></i>
+                                <div>Click "Watch Stream" to see user's screen</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="stream-controls">
+                        <h4>Stream Controls</h4>
+                        <button class="control-btn" onclick="watchUserStream()">
+                            <i class="fas fa-eye"></i> Watch Stream
+                        </button>
+                        <button class="control-btn" onclick="toggleAI()">
+                            <i class="fas fa-robot"></i> Toggle AI
+                        </button>
+                        <button class="control-btn danger" onclick="kickUserFromModal()">
+                            <i class="fas fa-ban"></i> Kick User
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/js/simple-working-admin.js"></script>
+    <script src="/js/advanced-admin.js"></script>
+    <script src="/js/admin.js"></script>
+</body>
+</html>
